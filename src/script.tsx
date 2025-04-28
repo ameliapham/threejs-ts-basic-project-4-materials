@@ -5,33 +5,18 @@ console.log("Hello, Three.js with TypeScript!");
 
 // --- Canvas Setup ---
 const canvas = document.querySelector("canvas.webgl") as HTMLCanvasElement;
-console.log("hello canvas")
 
 // --- Scene Setup ---
 const scene = new THREE.Scene();
-console.log("hello scene")
 
 // --- Setup Axes Helper ---
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
-// --- Size Setup ---
-const size = {
-    width : window.innerWidth,
-    height : window.innerHeight
-}
-
 // --- Camera Setup ---
-const camera = new THREE.PerspectiveCamera(75,size.width / size.height);
-scene.add(camera)
+const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
 camera.position.z = 3
-
-// --- Resize ---
-window.addEventListener("resize", () => {
-    camera.aspect = size.width / size.height
-    camera.updateProjectionMatrix()
-    renderer.setSize(size.width, size.height)
-})
+scene.add(camera)
 
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
@@ -39,9 +24,17 @@ controls.enableDamping = true
 
 // --- Renderer Setup ---
 const renderer = new THREE.WebGLRenderer({ canvas: canvas });
-renderer.setSize(size.width, size.height);
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
-// --- Loops ---
+// --- Resize ---
+window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight
+    camera.updateProjectionMatrix()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+})
+
+// --- Render Loop ---
 function animate(){
     controls.update()
     renderer.render(scene, camera);
