@@ -52,10 +52,20 @@ const material = new THREE.MeshNormalMaterial({
 })
 */
 
+/*
 // MeshMatcapMaterial
 const material = new THREE.MeshMatcapMaterial({
     matcap: matcapTexture
 })
+*/
+
+/*
+// MeshDepthMaterial
+const material = new THREE.MeshDepthMaterial()
+*/
+
+// MeshLambertMaterial
+const material = new THREE.MeshLambertMaterial()
 
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 16), 
@@ -75,6 +85,12 @@ const torus = new THREE.Mesh(
 torus.position.x = 2
 
 scene.add(sphere, plane, torus)
+
+// --- Lights Setup ---
+const ambientLight = new THREE.AmbientLight(0xffffff, 1)
+const pointLight = new THREE.PointLight(0xffffff, 30)
+
+scene.add(ambientLight, pointLight)
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
