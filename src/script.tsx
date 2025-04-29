@@ -22,6 +22,32 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 
+// --- Objects ---
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, 32, 16),
+    new THREE.MeshBasicMaterial({
+        color: "orange"
+    })
+)
+sphere.position.x = -2
+
+const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    new THREE.MeshBasicMaterial({
+        color: "pink"
+    })
+)
+
+const torus = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3, 0.15, 16, 32),
+    new THREE.MeshBasicMaterial({
+        color: "brown"
+    })
+)
+torus.position.x = 2
+
+scene.add(sphere, plane, torus)
+
 // --- Renderer Setup ---
 const renderer = new THREE.WebGLRenderer({ canvas: canvas });
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,9 +61,23 @@ window.addEventListener("resize", () => {
 })
 
 // --- Render Loop ---
+let clock = new THREE.Clock()
+
 function animate(){
+    // Clock
+    const elapsedTime = clock.getElapsedTime()
+
+    // Animation
+    sphere.rotation.x = 0.1 * elapsedTime
+    plane.rotation.x = 0.1 * elapsedTime
+    torus.rotation.x = 0.1 * elapsedTime
+
+    sphere.rotation.y = - 0.15 * elapsedTime
+    plane.rotation.y = - 0.15 * elapsedTime
+    torus.rotation.y = - 0.15 * elapsedTime
+
     controls.update()
     renderer.render(scene, camera);
-    window.requestAnimationFrame(animate)
+    requestAnimationFrame(animate)
 }
 animate()
