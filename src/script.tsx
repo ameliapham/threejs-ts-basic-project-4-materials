@@ -13,6 +13,49 @@ const scene = new THREE.Scene();
 const axesHelper = new THREE.AxesHelper(2)
 scene.add(axesHelper)
 
+// --- Texture ---
+const texture = new THREE.TextureLoader()
+
+const doorColorTexture = texture.load("/textures/door/basecolor.jpg")
+const doorAlphaTexture = texture.load("/textures/door/alpha.jpg")
+const doorHeightTexture = texture.load("/textures/door/height.jpg")
+const doorNormalTexture = texture.load("/textures/door/normal.jpg")
+const doorAmbientOcclusionTexture = texture.load("/textures/door/ambientOcclusion.jpg")
+const doorMetalnessTexture = texture.load("/textures/door/metalness.jpg")
+const doorRoughnessTexture = texture.load("/textures/door/roughness.jpg")
+
+const matcapTexture = texture.load("/textures/matcaps/8.png")
+const gradientTexture = texture.load("/textures/gradients/3.jpg")
+
+doorColorTexture.colorSpace = THREE.SRGBColorSpace
+matcapTexture.colorSpace = THREE.SRGBColorSpace
+
+// --- Objects ---
+const sphere = new THREE.Mesh(
+    new THREE.SphereGeometry(0.5, 32, 16),
+    new THREE.MeshBasicMaterial({
+        map: doorColorTexture,
+    })
+)
+sphere.position.x = -2
+
+const plane = new THREE.Mesh(
+    new THREE.PlaneGeometry(1, 1),
+    new THREE.MeshBasicMaterial({
+        map : doorColorTexture
+    })
+)
+
+const torus = new THREE.Mesh(
+    new THREE.TorusGeometry(0.3, 0.15, 16, 32),
+    new THREE.MeshBasicMaterial({
+        map: doorColorTexture
+    })
+)
+torus.position.x = 2
+
+scene.add(sphere, plane, torus)
+
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
 camera.position.z = 3
@@ -21,32 +64,6 @@ scene.add(camera)
 // --- Controls ---
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
-
-// --- Objects ---
-const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 32, 16),
-    new THREE.MeshBasicMaterial({
-        color: "orange"
-    })
-)
-sphere.position.x = -2
-
-const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1),
-    new THREE.MeshBasicMaterial({
-        color: "pink"
-    })
-)
-
-const torus = new THREE.Mesh(
-    new THREE.TorusGeometry(0.3, 0.15, 16, 32),
-    new THREE.MeshBasicMaterial({
-        color: "brown"
-    })
-)
-torus.position.x = 2
-
-scene.add(sphere, plane, torus)
 
 // --- Renderer Setup ---
 const renderer = new THREE.WebGLRenderer({ canvas: canvas });
