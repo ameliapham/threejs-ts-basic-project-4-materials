@@ -64,8 +64,17 @@ const material = new THREE.MeshMatcapMaterial({
 const material = new THREE.MeshDepthMaterial()
 */
 
+/*
 // MeshLambertMaterial
 const material = new THREE.MeshLambertMaterial()
+*/
+
+// MeshPhongMaterial
+const material = new THREE.MeshPhongMaterial({
+    color: "salmon",
+    shininess: 100,
+    specular: "blue"
+})
 
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 16), 
@@ -88,8 +97,7 @@ scene.add(sphere, plane, torus)
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-const pointLight = new THREE.PointLight(0xffffff, 30)
-
+const pointLight = new THREE.PointLight(0xffffff, 20)
 scene.add(ambientLight, pointLight)
 
 // --- Camera Setup ---
