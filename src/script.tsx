@@ -31,26 +31,32 @@ doorColorTexture.colorSpace = THREE.SRGBColorSpace
 matcapTexture.colorSpace = THREE.SRGBColorSpace
 
 // --- Objects ---
+
+// MeshBasicMaterial
+const material = new THREE.MeshBasicMaterial({
+    map: doorColorTexture,
+    //color: "salmon",
+    //wireframe: true,
+    //transparent: true,
+    //opacity: 0.5, // need transparent true
+    //alphaMap: doorAlphaTexture,
+    //side: THREE.DoubleSide
+})
+
 const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 32, 16),
-    new THREE.MeshBasicMaterial({
-        map: doorColorTexture,
-    })
+    new THREE.SphereGeometry(0.5, 32, 16), 
+    material
 )
 sphere.position.x = -2
 
 const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1),
-    new THREE.MeshBasicMaterial({
-        map : doorColorTexture
-    })
+    new THREE.PlaneGeometry(1, 1), 
+    material
 )
 
 const torus = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.15, 16, 32),
-    new THREE.MeshBasicMaterial({
-        map: doorColorTexture
-    })
+    material
 )
 torus.position.x = 2
 
