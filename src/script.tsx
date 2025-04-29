@@ -25,7 +25,7 @@ const doorMetalnessTexture = texture.load("/textures/door/metalness.jpg")
 const doorRoughnessTexture = texture.load("/textures/door/roughness.jpg")
 
 const matcapTexture = texture.load("/textures/matcaps/1.png")
-const gradientTexture = texture.load("/textures/gradients/3.jpg")
+const gradientTexture = texture.load("/textures/gradients/5.jpg")
 
 doorColorTexture.colorSpace = THREE.SRGBColorSpace
 matcapTexture.colorSpace = THREE.SRGBColorSpace
@@ -66,15 +66,29 @@ const material = new THREE.MeshDepthMaterial()
 
 /*
 // MeshLambertMaterial
-const material = new THREE.MeshLambertMaterial()
+const material = new THREE.MeshLambertMaterial({
+    color: "salmon"
+})
 */
 
+/*
 // MeshPhongMaterial
 const material = new THREE.MeshPhongMaterial({
     color: "salmon",
     shininess: 100,
     specular: "blue"
 })
+*/
+
+
+// MeshToonMaterial
+gradientTexture.minFilter = THREE.NearestFilter
+gradientTexture.magFilter = THREE.NearestFilter
+gradientTexture.generateMipmaps = false
+const material = new THREE.MeshToonMaterial({
+    gradientMap: gradientTexture
+})
+
 
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 16), 
@@ -97,7 +111,7 @@ scene.add(sphere, plane, torus)
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
-const pointLight = new THREE.PointLight(0xffffff, 20)
+const pointLight = new THREE.PointLight(0xffffff, 5)
 scene.add(ambientLight, pointLight)
 
 // --- Camera Setup ---
