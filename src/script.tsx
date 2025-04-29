@@ -33,6 +33,7 @@ matcapTexture.colorSpace = THREE.SRGBColorSpace
 // --- Objects ---
 
 // MeshBasicMaterial
+/*
 const material = new THREE.MeshBasicMaterial({
     map: doorColorTexture,
     //color: "salmon",
@@ -42,6 +43,13 @@ const material = new THREE.MeshBasicMaterial({
     //alphaMap: doorAlphaTexture,
     //side: THREE.DoubleSide
 })
+*/
+
+// MeshNormalMaterial
+const material = new THREE.MeshNormalMaterial({
+    flatShading: true
+})
+
 
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 16), 
