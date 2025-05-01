@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import GUI from "lil-gui";
+import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
 
 console.log("Hello, Three.js with TypeScript!");
 
@@ -94,24 +95,23 @@ const material = new THREE.MeshToonMaterial({
 
 // MeshStandardMaterial
 const material = new THREE.MeshStandardMaterial({
-    color: 0xaaaaaa,
-    roughness: 0.5,
-    metalness: 0.8
+    roughness: 0,
+    metalness: 1,
 })
 
 const sphere = new THREE.Mesh(
-    new THREE.SphereGeometry(0.5, 32, 16), 
+    new THREE.SphereGeometry(0.5, 64, 64), 
     material
 )
 sphere.position.x = -2
 
 const plane = new THREE.Mesh(
-    new THREE.PlaneGeometry(1, 1), 
+    new THREE.PlaneGeometry(1, 1, 100, 100), 
     material
 )
 
 const torus = new THREE.Mesh(
-    new THREE.TorusGeometry(0.3, 0.15, 16, 32),
+    new THREE.TorusGeometry(0.3, 0.15, 64, 120),
     material
 )
 torus.position.x = 2
@@ -130,6 +130,14 @@ gui.add(material, 'metalness').min(0).max(1).step(0.001)
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
 const pointLight = new THREE.PointLight(0xffffff, 5)
 scene.add(ambientLight, pointLight)
+
+// --- Environment map ---
+const rgbeLoader = new RGBELoader()
+rgbeLoader.load('textures/environmentMap/2k.hdr', (environment) => {
+    environment.mapping = THREE.EquirectangularReflectionMapping
+    scene.background = environment
+    scene.environment = environment
+})
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
