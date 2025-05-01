@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import GUI from "lil-gui";
 
 console.log("Hello, Three.js with TypeScript!");
 
@@ -80,15 +81,23 @@ const material = new THREE.MeshPhongMaterial({
 })
 */
 
-
+/*
 // MeshToonMaterial
 gradientTexture.minFilter = THREE.NearestFilter
 gradientTexture.magFilter = THREE.NearestFilter
 gradientTexture.generateMipmaps = false
 const material = new THREE.MeshToonMaterial({
+    color: "salmon",
     gradientMap: gradientTexture
 })
+*/
 
+// MeshStandardMaterial
+const material = new THREE.MeshStandardMaterial({
+    color: 0xaaaaaa,
+    roughness: 0.5,
+    metalness: 0.8
+})
 
 const sphere = new THREE.Mesh(
     new THREE.SphereGeometry(0.5, 32, 16), 
@@ -108,6 +117,14 @@ const torus = new THREE.Mesh(
 torus.position.x = 2
 
 scene.add(sphere, plane, torus)
+
+// --- Debug UI ---
+const gui = new GUI({
+    title: 'Material Controls'
+})
+
+gui.add(material, 'roughness').min(0).max(1).step(0.001)
+gui.add(material, 'metalness').min(0).max(1).step(0.001)
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
