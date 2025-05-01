@@ -95,8 +95,13 @@ const material = new THREE.MeshToonMaterial({
 
 // MeshStandardMaterial
 const material = new THREE.MeshStandardMaterial({
-    roughness: 0,
-    metalness: 1,
+    roughness: 0.5,
+    metalness: 0.5,
+    map: doorColorTexture,
+    aoMap: doorAmbientOcclusionTexture,
+    aoMapIntensity: 2,
+    displacementMap: doorHeightTexture,
+    displacementScale: 0.05,
 })
 
 const sphere = new THREE.Mesh(
