@@ -102,6 +102,11 @@ const material = new THREE.MeshStandardMaterial({
     aoMapIntensity: 2,
     displacementMap: doorHeightTexture,
     displacementScale: 0.05,
+    metalnessMap: doorMetalnessTexture,
+    roughnessMap: doorRoughnessTexture,
+    normalMap: doorNormalTexture,
+    transparent: true,
+    alphaMap: doorAlphaTexture,
 })
 
 const sphere = new THREE.Mesh(
