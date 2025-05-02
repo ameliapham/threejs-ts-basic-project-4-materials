@@ -133,11 +133,13 @@ const material = new THREE.MeshPhysicalMaterial({
     //sheenRoughness : 0.5,
     //sheenColor : new THREE.Color(0x0000ff),
 
-    iridescence: 1,
-    iridescenceIOR: 1,
-    iridescenceThicknessRange: [100, 800],
+    //iridescence: 1,
+    //iridescenceIOR: 1,
+    //iridescenceThicknessRange: [100, 800],
 
-
+    transmission: 1,
+    ior: 1.5,
+    thickness: 0.5,
 })
 
 const sphere = new THREE.Mesh(
@@ -176,10 +178,14 @@ const physicalMaterial = gui.addFolder('Physical Material')
 //physicalMaterial.add(material, 'sheenRoughness').min(0).max(1).step(0.001)
 //physicalMaterial.addColor(material, 'sheenColor')
 
-physicalMaterial.add(material, 'iridescence').min(0).max(1).step(0.001)
-physicalMaterial.add(material, 'iridescenceIOR').min(1).max(2.333).step(0.001)
-physicalMaterial.add(material.iridescenceThicknessRange, '0').min(1).max(1000).step(1)
-physicalMaterial.add(material.iridescenceThicknessRange, '1').min(1).max(1000).step(1)
+//physicalMaterial.add(material, 'iridescence').min(0).max(1).step(0.001)
+//physicalMaterial.add(material, 'iridescenceIOR').min(1).max(2.333).step(0.001)
+//physicalMaterial.add(material.iridescenceThicknessRange, '0').min(1).max(1000).step(1)
+//physicalMaterial.add(material.iridescenceThicknessRange, '1').min(1).max(1000).step(1)
+
+physicalMaterial.add(material, 'transmission').min(0).max(1).step(0.001)
+physicalMaterial.add(material, 'ior').min(1).max(10).step(0.001)
+physicalMaterial.add(material, 'thickness').min(0).max(1).step(0.001)
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
