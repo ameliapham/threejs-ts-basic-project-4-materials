@@ -1,6 +1,12 @@
 {
     "cSpell.words": [
         "basecolor",
-        "metalness"
+        "clearcoat",
+        "Equirectangular",
+        "Matcap",
+        "matcaps",
+        "metalness",
+        "Phong",
+        "RGBE"
     ]
 }
