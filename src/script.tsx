@@ -126,8 +126,13 @@ const material = new THREE.MeshPhysicalMaterial({
     //transparent: true,
     //alphaMap: doorAlphaTexture,
 
-    clearcoat: 1,
-    clearcoatRoughness: 0,
+    //clearcoat: 1,
+    //clearcoatRoughness: 0,
+
+    sheen : 1,
+    sheenRoughness : 0.5,
+    sheenColor : new THREE.Color(0x0000ff),
+
 })
 
 const sphere = new THREE.Mesh(
@@ -159,8 +164,12 @@ standardMaterial.add(material, 'roughness').min(0).max(1).step(0.001)
 standardMaterial.add(material, 'metalness').min(0).max(1).step(0.001)
 
 const physicalMaterial = gui.addFolder('Physical Material')
-physicalMaterial.add(material, 'clearcoat').min(0).max(1).step(0.001)
-physicalMaterial.add(material, 'clearcoatRoughness').min(0).max(1).step(0.001)
+//physicalMaterial.add(material, 'clearcoat').min(0).max(1).step(0.001)
+//physicalMaterial.add(material, 'clearcoatRoughness').min(0).max(1).step(0.001)
+
+physicalMaterial.add(material, 'sheen').min(0).max(1).step(0.001)
+physicalMaterial.add(material, 'sheenRoughness').min(0).max(1).step(0.001)
+physicalMaterial.addColor(material, 'sheenColor')
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
