@@ -113,16 +113,16 @@ const material = new THREE.MeshStandardMaterial({
 
 // MeshPhysicalMaterial
 const material = new THREE.MeshPhysicalMaterial({
-    roughness: 0.5,
-    metalness: 0.5,
-    map: doorColorTexture,
-    aoMap: doorAmbientOcclusionTexture,
-    aoMapIntensity: 2,
-    displacementMap: doorHeightTexture,
-    displacementScale: 0.05,
-    metalnessMap: doorMetalnessTexture,
-    roughnessMap: doorRoughnessTexture,
-    normalMap: doorNormalTexture,
+    roughness: 0,
+    metalness: 0,
+    // map: doorColorTexture,
+    // aoMap: doorAmbientOcclusionTexture,
+    // aoMapIntensity: 2,
+    // displacementMap: doorHeightTexture,
+    // displacementScale: 0.05,
+    // metalnessMap: doorMetalnessTexture,
+    // roughnessMap: doorRoughnessTexture,
+    // normalMap: doorNormalTexture,
     //transparent: true,
     //alphaMap: doorAlphaTexture,
 
@@ -138,7 +138,7 @@ const material = new THREE.MeshPhysicalMaterial({
     //iridescenceThicknessRange: [100, 800],
 
     transmission: 1,
-    ior: 1.5,
+    ior: 1.3,
     thickness: 0.5,
 })
 
@@ -152,12 +152,12 @@ const plane = new THREE.Mesh(
     new THREE.PlaneGeometry(1, 1, 100, 100), 
     material
 )
+plane.position.x = 2
 
 const torus = new THREE.Mesh(
     new THREE.TorusGeometry(0.3, 0.15, 64, 120),
     material
 )
-torus.position.x = 2
 
 scene.add(sphere, plane, torus)
 
@@ -202,7 +202,7 @@ rgbeLoader.load('textures/environmentMap/2k.hdr', (environment) => {
 
 // --- Camera Setup ---
 const camera = new THREE.PerspectiveCamera(75,window.innerWidth / window.innerHeight);
-camera.position.z = 3
+camera.position.z = 1
 scene.add(camera)
 
 // --- Controls ---
