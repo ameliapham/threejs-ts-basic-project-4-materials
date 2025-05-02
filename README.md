@@ -1,6 +1,6 @@
 ![Screenshot 2025-05-02 at 03 04 57](https://github.com/user-attachments/assets/ad09eebf-da7c-4d86-865b-0682a244ff30)
 
-#Three.js + TypeScript + Vite Project
+# Three.js + TypeScript + Vite Project
 
 My basic project is using **Three.js** with **TypeScript** and **Vite**.  
 The focus is on learning about **Materials** and implement a simple **debug UI** to tweak parameters in real-time.
