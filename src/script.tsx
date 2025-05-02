@@ -129,9 +129,14 @@ const material = new THREE.MeshPhysicalMaterial({
     //clearcoat: 1,
     //clearcoatRoughness: 0,
 
-    sheen : 1,
-    sheenRoughness : 0.5,
-    sheenColor : new THREE.Color(0x0000ff),
+    //sheen : 1,
+    //sheenRoughness : 0.5,
+    //sheenColor : new THREE.Color(0x0000ff),
+
+    iridescence: 1,
+    iridescenceIOR: 1,
+    iridescenceThicknessRange: [100, 800],
+
 
 })
 
@@ -167,9 +172,14 @@ const physicalMaterial = gui.addFolder('Physical Material')
 //physicalMaterial.add(material, 'clearcoat').min(0).max(1).step(0.001)
 //physicalMaterial.add(material, 'clearcoatRoughness').min(0).max(1).step(0.001)
 
-physicalMaterial.add(material, 'sheen').min(0).max(1).step(0.001)
-physicalMaterial.add(material, 'sheenRoughness').min(0).max(1).step(0.001)
-physicalMaterial.addColor(material, 'sheenColor')
+//physicalMaterial.add(material, 'sheen').min(0).max(1).step(0.001)
+//physicalMaterial.add(material, 'sheenRoughness').min(0).max(1).step(0.001)
+//physicalMaterial.addColor(material, 'sheenColor')
+
+physicalMaterial.add(material, 'iridescence').min(0).max(1).step(0.001)
+physicalMaterial.add(material, 'iridescenceIOR').min(1).max(2.333).step(0.001)
+physicalMaterial.add(material.iridescenceThicknessRange, '0').min(1).max(1000).step(1)
+physicalMaterial.add(material.iridescenceThicknessRange, '1').min(1).max(1000).step(1)
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
