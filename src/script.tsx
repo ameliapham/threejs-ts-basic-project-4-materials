@@ -93,6 +93,7 @@ const material = new THREE.MeshToonMaterial({
 })
 */
 
+/*
 // MeshStandardMaterial
 const material = new THREE.MeshStandardMaterial({
     roughness: 0.5,
@@ -107,6 +108,26 @@ const material = new THREE.MeshStandardMaterial({
     normalMap: doorNormalTexture,
     transparent: true,
     alphaMap: doorAlphaTexture,
+})
+*/
+
+// MeshPhysicalMaterial
+const material = new THREE.MeshPhysicalMaterial({
+    roughness: 0.5,
+    metalness: 0.5,
+    map: doorColorTexture,
+    aoMap: doorAmbientOcclusionTexture,
+    aoMapIntensity: 2,
+    displacementMap: doorHeightTexture,
+    displacementScale: 0.05,
+    metalnessMap: doorMetalnessTexture,
+    roughnessMap: doorRoughnessTexture,
+    normalMap: doorNormalTexture,
+    //transparent: true,
+    //alphaMap: doorAlphaTexture,
+
+    clearcoat: 1,
+    clearcoatRoughness: 0,
 })
 
 const sphere = new THREE.Mesh(
@@ -133,8 +154,13 @@ const gui = new GUI({
     title: 'Material Controls'
 })
 
-gui.add(material, 'roughness').min(0).max(1).step(0.001)
-gui.add(material, 'metalness').min(0).max(1).step(0.001)
+const standardMaterial = gui.addFolder('Standard Material')
+standardMaterial.add(material, 'roughness').min(0).max(1).step(0.001)
+standardMaterial.add(material, 'metalness').min(0).max(1).step(0.001)
+
+const physicalMaterial = gui.addFolder('Physical Material')
+physicalMaterial.add(material, 'clearcoat').min(0).max(1).step(0.001)
+physicalMaterial.add(material, 'clearcoatRoughness').min(0).max(1).step(0.001)
 
 // --- Lights Setup ---
 const ambientLight = new THREE.AmbientLight(0xffffff, 1)
